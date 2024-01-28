@@ -10,12 +10,15 @@ mongoose.connect(process.env.MONGODB_URI, {
   useUnifiedTopology: true,
 });
 
-// Create a MongoDB schema and model
 const leaderboardSchema = new mongoose.Schema({
-  rank: Number,
-  playerName: String,
-  score: Number,
-});
+    rank: Number,
+    teamName: String,         
+    teamMembers: [String],    
+    githubLink: String,       
+    projectLink: String,     
+    score: Number,
+  });
+  
 
 const Leaderboard = mongoose.model('Leaderboard', leaderboardSchema);
 
@@ -45,3 +48,4 @@ app.get('/api/leaderboard/top3', async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+module.exports = Leaderboard;
